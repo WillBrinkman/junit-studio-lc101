@@ -16,20 +16,31 @@ public class BalancedBrackets {
      *  "[LaunchCode]", "Launch[Code]", "[]LaunchCode", "", "[]"
      *
      * While these do not:
-     *   "[LaunchCode", "Launch]Code[", "[", "]["
-     *
+     *   Code[", "[", "]["
+     *"[LaunchCode", "Launch]
      * @param str - to be validated
      * @return true if balanced, false otherwise
      */
+
+    // Nested brackets?  two variables? can't equal 0?
+
+
     public static boolean hasBalancedBrackets(String str) {
-        int brackets = 0;
+        int bracketOpen = 0;
+        int bracketClose = 0;
         for (char ch : str.toCharArray()) {
             if (ch == '[') {
-                brackets++;
+                bracketOpen++;
             } else if (ch == ']') {
-                brackets--;
+                bracketClose++;
+                if (bracketClose > bracketOpen) {
+                    break;
+                }
             }
         }
-        return brackets == 0;
+        if (bracketOpen >= 1) {
+            return (bracketOpen == bracketClose);
+        }
+        return false;
     }
 }
